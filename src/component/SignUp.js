@@ -2,12 +2,19 @@ import './SignUp.css'
 import { NavLink} from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { GoogleLogin } from '@react-oauth/google';
+import { useEffect, useState } from 'react';
 
 
 export default function SignUp() {
     const{register,formState,handleSubmit,watch}=useForm();
+    const [items,setItems]=useState([])
+    // useEffect(()=>{
+    //     localStorage.setItem('items',JSON.stringify(data))
+    // },[])
     const{errors}=formState;
     const onsubmitFtn=(data)=>{
+        localStorage.setItem('items',JSON.stringify(data))
+        window.location.reload()
         console.log(data);
     }
   return (

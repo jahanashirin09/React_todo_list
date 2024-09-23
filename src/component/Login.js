@@ -8,7 +8,11 @@ export default function Login() {
   const{register,formState,handleSubmit}=useForm();
   const{errors}=formState
   const onsubmitFtn=(data)=>{
-console.log();
+console.log(data);
+   
+  }
+  const saveUSerInfo=(data)=>{
+    localStorage.setItem("cred",JSON.stringify(data))
   }
   return (
     <div>
@@ -52,7 +56,7 @@ console.log();
                 {errors.password?.message&&<p className='error-message'>{errors.password.message}</p>}
             </div>
             
-            <button className='login-button'>Login</button>
+            <button className='login-button' onClick={()=>saveUSerInfo}>Login</button>
             <div className='login-text-box'>
             Don't have an account? <NavLink to="/">  SignUp </NavLink>
             <NavLink to="/listapage">List</NavLink>
