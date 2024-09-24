@@ -11,7 +11,7 @@ export default function PageNavigation() {
         <Routes>
            <Route path="/"element={<SignUp/>}></Route>
           <Route element={<PrivateRoutes/>}>
-            <Route path="/listapage" element={<ListPage/>}/>
+            <Route path="/listpage" element={<ListPage/>}/>
           </Route>
           <Route path="/login"element={<Login/>}></Route>
         </Routes>

@@ -2,39 +2,39 @@ import './SignUp.css'
 import { NavLink} from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { GoogleLogin } from '@react-oauth/google';
-import { useEffect, useState } from 'react';
+import {jwtDecode} from 'jwt-decode';
 
 
 export default function SignUp() {
-    const{register,formState,handleSubmit,watch}=useForm();
-    const [items,setItems]=useState([])
-    // useEffect(()=>{
-    //     localStorage.setItem('items',JSON.stringify(data))
-    // },[])
+    const{register,formState,handleSubmit,watch}=useForm(); 
     const{errors}=formState;
     const onsubmitFtn=(data)=>{
-        localStorage.setItem('items',JSON.stringify(data))
-        window.location.reload()
+      localStorage.setItem('items',JSON.stringify(data))
+        window.location.reload()  
         console.log(data);
     }
+    const handleGoogleLogin = (response) => {
+        const signUpdecoded = jwtDecode(response.credential);
+        localStorage.setItem('google-items',JSON.stringify(signUpdecoded))
+        console.log(signUpdecoded);};
+        
+
+    const handleGoogleError = (error) => {
+        console.error('Google login failed:', error);};
   return (
     <div >
         <div className='signup-header'>
             SignUp
         </div>
        
-        <form className='signup-main-container' onSubmit={handleSubmit(onsubmitFtn)} noValidate>
+        <form className='signup-main-container'  onSubmit={handleSubmit(onsubmitFtn)} noValidate>
+        <GoogleLogin className="gogle-auth"
+                onSuccess={handleGoogleLogin}
+                onError={handleGoogleError}       
+                text='signin_with'
+            />
             <div className='form-group'>
-            <div className='googleOauth'>
-            <GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>
-                </div>
+         
                 <label>Name</label>
              
                 <input  placeholder='Enter Name...'
@@ -104,6 +104,7 @@ export default function SignUp() {
         
 
         </form>
+
        
     </div>
   

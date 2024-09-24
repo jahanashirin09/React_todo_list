@@ -52,5 +52,10 @@
    .signup-button:hover {
      background-color: rgb(6, 142, 52);
    }
-   
+   .error-messages{
+    color:red;
+  font-size: 18px;
+  margin-top: 2px;
+ text-align: center;
+   }
    
