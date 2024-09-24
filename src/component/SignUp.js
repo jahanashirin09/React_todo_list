@@ -15,7 +15,7 @@ export default function SignUp() {
     }
     const handleGoogleLogin = (response) => {
         const signUpdecoded = jwtDecode(response.credential);
-        localStorage.setItem('google-items',JSON.stringify(signUpdecoded))
+        localStorage.setItem('items',JSON.stringify(signUpdecoded))
         console.log(signUpdecoded);};
         
 

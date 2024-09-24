@@ -28,12 +28,10 @@ export default function Login() {
    console.log(data.email,"data");
    
   }
-  const saveUSerInfo=(data)=>{
-    localStorage.setItem("cred",JSON.stringify(data))
-  }
+  
   const handleGoogleLogin = (response) => {
     const signUpdecoded = jwtDecode(response.credential);
-    const google_items=JSON.parse(localStorage.getItem('google-items'))
+    const google_items=JSON.parse(localStorage.getItem('items'))
     const google_signUp_name=signUpdecoded.given_name;
     const google_signUp_email=signUpdecoded.email;
     const google_login_name=google_items.given_name;
@@ -92,7 +90,7 @@ const handleGoogleError = (error) => {
                 
             </div>
             
-            <button className='login-button' onClick={()=>saveUSerInfo}>Login</button>
+            <button className='login-button' >Login</button>
             <div className='login-text-box'>
             Don't have an account? <NavLink to="/">  SignUp </NavLink>
             
