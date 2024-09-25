@@ -1,5 +1,5 @@
 .signup-header{
-margin: 300px auto 20px auto;
+margin: 50px auto 20px auto;
 text-align: center;
  font-weight:800;
  font-size: 35px;
@@ -59,7 +59,7 @@ text-align: center;
   margin-left: 10px;
 
 }
-.gogle-auth{
+.google-auth{
   width:200px;
   margin-left: 140px;
 }

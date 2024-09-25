@@ -30,11 +30,16 @@ export default function SignUp() {
         </div>
        
         <form className='signup-main-container'  onSubmit={handleSubmit(onsubmitFtn)} noValidate>
-        <GoogleLogin className="gogle-auth"
-                onSuccess={handleGoogleLogin}
-                onError={handleGoogleError}       
-                text='signup_with'
-            />
+            <div className='google-auth'>
+            <GoogleLogin shape='circle'
+        
+        onSuccess={handleGoogleLogin}
+        onError={handleGoogleError}       
+        text='signup_with'
+    />
+
+            </div>
+        
             <div className='form-group'>
          
                 <label>Name</label>
