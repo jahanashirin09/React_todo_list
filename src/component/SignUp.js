@@ -11,39 +11,29 @@ export default function SignUp() {
     const{errors}=formState;
     const onsubmitFtn=(data)=>{
       localStorage.setItem('items',JSON.stringify(data))
-        window.location.reload()  
-        console.log(data);
-    }
+       navigate('/')
+       console.log(data);}
     const handleGoogleLogin = (response) => {
         const signUpdecoded = jwtDecode(response.credential);
         localStorage.setItem('items',JSON.stringify(signUpdecoded))
-        navigate('/login')
+        navigate('/')
         console.log(signUpdecoded);};
-        
-
     const handleGoogleError = (error) => {
         console.error('Google login failed:', error);};
-  return (
+    return (
     <div >
         <div className='signup-header'>
             SignUp
         </div>
-       
         <form className='signup-main-container'  onSubmit={handleSubmit(onsubmitFtn)} noValidate>
             <div className='google-auth'>
             <GoogleLogin shape='circle'
-        
         onSuccess={handleGoogleLogin}
         onError={handleGoogleError}       
         text='signup_with'
-    />
-
-            </div>
-        
-            <div className='form-group'>
-         
+    /></div>
+    <div className='form-group'>
                 <label>Name</label>
-             
                 <input  placeholder='Enter Name...'
                 {...register("name",
                     {required:{
@@ -96,24 +86,12 @@ export default function SignUp() {
                         validate:(val)=>{
                             if(watch('password')!==val){
                                 return 'passwords do not match'
-                            }
-
-                        }
-                    }
-                )}/>
+                    }}})}/>
                 {errors.confirmPassword?.message&&<p className='error-message'>{errors.confirmPassword.message}</p>}
             </div>
-            <button to="./login" className='signup-button' onClick={()=>navigate('/login')}>Sign Up</button>
+            <button to="./login" className='signup-button' >Sign Up</button>
             <div className='login-text-box'>
-            Already have an account  <NavLink to="/login">Login here</NavLink>
-           
-            </div>
-        
-
-        </form>
-
-       
-    </div>
-  
-  )
-}
+            Already have an account  <NavLink to="/">Login here</NavLink>
+           </div>
+           </form>
+           </div>)}

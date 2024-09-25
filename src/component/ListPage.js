@@ -7,11 +7,9 @@ export default function ListPage() {
   return (
     <div className='listpage-main-cointainer'>
         <div className='listpage-header-container'>
-            My To Do List
-           
+            My To Do List  
         </div>
         <Addlist/>
-        
     </div>
   )
 }

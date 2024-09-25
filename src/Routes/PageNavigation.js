@@ -9,11 +9,12 @@ export default function PageNavigation() {
   return (
     <div>
         <Routes>
-           <Route path="/"element={<SignUp/>}></Route>
+        <Route path="/"element={<Login/>}></Route>
+           <Route path="/signUp"element={<SignUp/>}></Route>
           <Route element={<PrivateRoutes/>}>
             <Route path="/listpage" element={<ListPage/>}/>
           </Route>
-          <Route path="/login"element={<Login/>}></Route>
+         
         </Routes>
        
     </div>

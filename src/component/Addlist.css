@@ -52,17 +52,7 @@
   width: 90%;
   margin-bottom: 20px;
 }
-.list-item-green{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  outline: none;
-  padding: 10px 10px;
-  border-radius: 4px;
-  border: 2px solid rgba(6, 159, 57, 0.925);
-  width:90%;
-  margin-bottom: 20px;
-}
+
 .list-btn {
   display: flex;
   flex-direction: row;
@@ -117,20 +107,10 @@
 .move-up:hover,.move-down:hover {
   background-color: rgba(102, 177, 239, 0.766);
 }
-.completed{
-  background-color: rgba(102, 178, 239, 0.935);
-  text-align: center;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 15px;
-  border: none;
-  width: 20;
-  gap: 120px;
-  height: 40px;
-}
-.completed:hover{
-  background-color: rgba(102, 177, 239, 0.766);
+
+.text-taskcompleted {
+  text-decoration-style:solid;
+  text-decoration-line: line-through; 
+  text-decoration-color: rgb(207, 81, 81);
+
 }

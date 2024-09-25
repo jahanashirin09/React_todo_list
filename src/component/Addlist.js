@@ -1,74 +1,85 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Addlist.css'
+import {v4 as uuidv4} from "uuid";
 export default function Addlist() {
+  // const initialState=JSON.parse(localStorage.getItem("tasks"))||[];
     const[tasks,setTask]=useState([]);
     const[newTask,setNewTask]=useState("");
-    const[style,setStyle]=useState([]);
+    const[editTask,SetEditTask]=useState(null)
+    useEffect(()=>{
+      localStorage.getItem("tasks",JSON.stringify(tasks))
+    },[tasks])
+    const updateTask=(title,id,completed)=>{
+      const newwTask=tasks.map((task)=>
+        task.id===id?{title,id,completed}:task);
+      setTask(newwTask);
+      SetEditTask("")};
+    useEffect(()=>{
+      if(editTask){
+        setNewTask(editTask.title)
+      }else{
+        setNewTask("")
+      }
+    },[setNewTask,editTask])
+    const onInputChange=(event)=>{
+      setNewTask(event.target.value)
+    };
+    const onFormSubmit=(event)=>{
+      event.preventDefault();
+      if(!editTask){
+        setTask([...tasks,{id:uuidv4(),title:newTask,completed:false}])
+      setNewTask("")
 
-
-    function handleTaskChange(event){
-        setNewTask(event.target.value)}
-
-    function addTask(){
-      if(newTask.trim()!==""){
-        setTask(t=>[...t,newTask])
-      setNewTask("")}}
-    function deleteTask(taskId){
-       setTask(
-          tasks.filter((value,index)=>{
-            return index !== taskId;}))}
-    function moveUp(index){
-          if(index>0){
-            const updatedTask=[...tasks];
-            [updatedTask[index],updatedTask[index-1]]=[updatedTask[index-1],updatedTask[index]]
-            setTask(updatedTask)}}
-    function moveDown(index){
-          if(index<tasks.length-1){
-            const updatedTask=[...tasks];
-            [updatedTask[index],updatedTask[index+1]]=[updatedTask[index+1],updatedTask[index]]
-            setTask(updatedTask)}}
-    function completed(index){
-      if(style.indexOf(index)=== -1)
-        setStyle([...style,index])
-     
-     console.log(style);
+      }else{
+        updateTask(newTask,editTask.id,editTask.completed)
+      }}
+    const handledelete=({id})=>{
+      setTask(tasks.filter((task)=>task.id !== id))
     }
+    const handleComplete=(task)=>{
+      setTask(
+        tasks.map((item)=>{
+          console.log(item.id)
+          if(item.id===task.id){
+            return{...item,completed: !item.completed}
+          }
+          return item;
+        }))}
+    const handleEdit=({id})=>{
+      const findTodo=tasks.find((task)=>task.id===id);
+      SetEditTask(findTodo)}
+  
   return (
     <div>
-        <div className='addlist-container'>
+      <form onSubmit={onFormSubmit}>
+        <div className='addlist-container'> 
         <input className='input-task'
         type='text'
-        placeholder='Task'
+        placeholder='Enter a Todo...'
         value={newTask}
-        onChange={handleTaskChange}
+        required
+        onChange={onInputChange}
         />
-        
-        <button className='Add-task'
-        onClick={addTask}>
-            Add Task
-
+         <button className='Add-task'>
+            {editTask?"Ok":"add task"}
         </button>
-
         </div>
-        <div className='overViewContainer'>
-       <ol>
-        {tasks.map((task,index)=>
-            <li key={index} className={style.indexOf(index)!== -1?'list-item-green':'list-item'}>
-              <div className='text-container'>
-                <span className='text-task'>{task}</span>
-               
-                </div>
-                <div className='list-btn'>
-                <button className='delete-btn' onClick={()=>deleteTask(index)}>Delete</button>
-                <button className='move-up' onClick={()=>moveUp(index)}>⬆️</button>
-                <button className='move-down' onClick={()=>moveDown(index)}>⬇️</button>
-                <button className='completed' onClick={()=>completed(index)}>✅</button>
+       <div className='overViewContainer'>
+       {tasks.map((task)=>(
+        <li className='list-item' key={task.id}>
+         
+          <input type="text" value={task.title} className={`text-task${task.completed? "completed":""}`} onChange={(event)=>event.preventDefault()}>
+          </input>
+          <div className='list-btn'>
+                <button className='delete-btn'  onClick={()=>handledelete(task)}>Delete</button>
+                <button className='move-up' onClick={()=>handleComplete(task)} >complete</button>
+                <button className='move-down' onClick={()=>handleEdit(task)} >edit</button>
                 </div>
 
-            </li>
-        )}
-       </ol>
+        </li>
+       ))}
+       </div>
+        </form>
+        
     </div>
-    </div>
-  )
-}
+    )}

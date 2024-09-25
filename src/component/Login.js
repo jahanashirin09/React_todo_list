@@ -10,36 +10,26 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { errors } = formState;
-
   const ERROR_MESSAGES = {
     ACCOUNT_NOT_EXIST: "Account doesn't exist",
     INVALID_USER: "Invalid user",
     EMAIL_REQUIRED: "Email is required",
-    PASSWORD_REQUIRED: "Password is required",
-  };
-
+    PASSWORD_REQUIRED: "Password is required",};
   const onsubmitFtn = (data) => {
     const item = localStorage.getItem('items');
     if (!item) {
       setError(ERROR_MESSAGES.ACCOUNT_NOT_EXIST);
-      return;
-    }
-
-    const parsedItem = JSON.parse(item);
-    const { email: signupEmail, password: signupPassword } = parsedItem;
-
+      return;}
+  const parsedItem = JSON.parse(item);
+  const { email: signupEmail, password: signupPassword } = parsedItem;
     if (signupEmail === data.email && signupPassword === data.password) {
       const login_data="loged"
       localStorage.setItem('login_items',JSON.stringify(login_data))
-
       navigate('/listpage');
     } else {
       const login_data=""
       localStorage.setItem('login_items',JSON.stringify(login_data))
-      setError(ERROR_MESSAGES.INVALID_USER);
-    }
-  };
-
+      setError(ERROR_MESSAGES.INVALID_USER);}};
   const handleGoogleLogin = (response) => {
     const decodedUser = jwtDecode(response.credential);
     const googleItems = JSON.parse(localStorage.getItem('items')) ;
@@ -70,9 +60,7 @@ export default function Login() {
        <div className='login-header'>
        Login
         </div>
-       
         <form className='login-main-container' onSubmit={handleSubmit(onsubmitFtn)} >
-        
             <div className='form-group'>
             <GoogleLogin className="gogle-auth"
                 onSuccess={handleGoogleLogin}
@@ -85,35 +73,25 @@ export default function Login() {
                 {...register("email",
                   {required:{
                     value:true,
-                    message:"email is required"
-
-                  }}
-                )}/>
+                    message:"email is required"}})}/>
                 {errors.email?.message&&<p className='error-message'>{errors.email.message}</p>}
             </div>
             <div className='form-group'>
                 <label>Password</label>
                 <input placeholder='Enter Password...'
+                type="password"
                 {...register("password",
                   {required:{
                     value:true,
                     message:"password is required"
-                  }}
-                )}/>
+                  }})}/>
                 {errors.password?.message&&<p className='error-message'>{errors.password.message}</p>}
-                
-            </div>
-            
+              </div>
             <button className='login-button' >Login</button>
             <div className='login-text-box'>
-            Don't have an account? <NavLink to="/">  SignUp </NavLink>
-            
-           
+            Don't have an account? <NavLink to="/signUp">  SignUp </NavLink>
             </div>
-        
-
-        </form>
-       
+        </form> 
     </div>
   )
 }
