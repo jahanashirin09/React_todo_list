@@ -33,7 +33,7 @@ export default function SignUp() {
         <GoogleLogin className="gogle-auth"
                 onSuccess={handleGoogleLogin}
                 onError={handleGoogleError}       
-                text='signin_with'
+                text='signup_with'
             />
             <div className='form-group'>
          
