@@ -1,5 +1,5 @@
 import './SignUp.css'
-import { NavLink} from 'react-router-dom'
+import { NavLink,useNavigate} from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { GoogleLogin } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
@@ -7,6 +7,7 @@ import {jwtDecode} from 'jwt-decode';
 
 export default function SignUp() {
     const{register,formState,handleSubmit,watch}=useForm(); 
+    const navigate = useNavigate();
     const{errors}=formState;
     const onsubmitFtn=(data)=>{
       localStorage.setItem('items',JSON.stringify(data))
@@ -16,6 +17,7 @@ export default function SignUp() {
     const handleGoogleLogin = (response) => {
         const signUpdecoded = jwtDecode(response.credential);
         localStorage.setItem('items',JSON.stringify(signUpdecoded))
+        navigate('/login')
         console.log(signUpdecoded);};
         
 
@@ -96,7 +98,7 @@ export default function SignUp() {
                 )}/>
                 {errors.confirmPassword?.message&&<p className='error-message'>{errors.confirmPassword.message}</p>}
             </div>
-            <button to="./login" className='signup-button' >Sign Up</button>
+            <button to="./login" className='signup-button' onClick={()=>navigate('/login')}>Sign Up</button>
             <div className='login-text-box'>
             Already have an account  <NavLink to="/login">Login here</NavLink>
            
