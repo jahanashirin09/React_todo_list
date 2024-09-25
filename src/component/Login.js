@@ -6,51 +6,65 @@ import { GoogleLogin } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
 
 export default function Login() {
-  const{register,formState,handleSubmit}=useForm();
-  const [error ,setError]=useState('')
-  const navigate=useNavigate();
-  const{errors}=formState
+  const { register, formState, handleSubmit } = useForm();
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const { errors } = formState;
 
-  const onsubmitFtn=(data)=>{
-    const item=JSON.parse(localStorage.getItem('items'))
-    const sighupEmail=item.email;
-    const loginEmail=data.email;
-    const sighnupPassword=item.password;
-    const loginPassword=data.password;
-    if(sighupEmail===loginEmail && sighnupPassword===loginPassword){
-      navigate('/listpage')
-    }else{
-      console.log('invalid user');
-      setError("invalid user")
+  const ERROR_MESSAGES = {
+    ACCOUNT_NOT_EXIST: "Account doesn't exist",
+    INVALID_USER: "Invalid user",
+    EMAIL_REQUIRED: "Email is required",
+    PASSWORD_REQUIRED: "Password is required",
+  };
+
+  const onsubmitFtn = (data) => {
+    const item = localStorage.getItem('items');
+    if (!item) {
+      setError(ERROR_MESSAGES.ACCOUNT_NOT_EXIST);
+      return;
     }
-  
-    console.log(item.email,"item");
-   console.log(data.email,"data");
-   
-  }
-  
+
+    const parsedItem = JSON.parse(item);
+    const { email: signupEmail, password: signupPassword } = parsedItem;
+
+    if (signupEmail === data.email && signupPassword === data.password) {
+      const login_data="loged"
+      localStorage.setItem('login_items',JSON.stringify(login_data))
+
+      navigate('/listpage');
+    } else {
+      const login_data=""
+      localStorage.setItem('login_items',JSON.stringify(login_data))
+      setError(ERROR_MESSAGES.INVALID_USER);
+    }
+  };
+
   const handleGoogleLogin = (response) => {
-    const signUpdecoded = jwtDecode(response.credential);
-    const google_items=JSON.parse(localStorage.getItem('items'))
-    const google_signUp_name=signUpdecoded.given_name;
-    const google_signUp_email=signUpdecoded.email;
-    const google_login_name=google_items.given_name;
-    const google_login_email=google_items.email;
-    if(google_signUp_name===google_login_name && google_signUp_email===google_login_email){
-      navigate('/listpage')
-    }
-    else{
-      console.log('invalid user');
-      setError("invalid user")
+    const decodedUser = jwtDecode(response.credential);
+    const googleItems = JSON.parse(localStorage.getItem('items')) ;
+    const { given_name: googleName, email: googleEmail } = decodedUser;
+    if (!googleItems) {
+      setError(ERROR_MESSAGES.ACCOUNT_NOT_EXIST);
+      return;
     }
 
-    console.log(signUpdecoded,"stored");
-    console.log(google_items,"new");};
-   
-    
+    if (googleItems && googleName === googleItems.given_name && googleEmail === googleItems.email) {
+      const login_data="loged"
+      localStorage.setItem('login_items',JSON.stringify(login_data))
+      navigate('/listpage');
+    } else {
+      localStorage.setItem()
+      const login_data=""
+      localStorage.setItem('login_items',JSON.stringify(login_data))
+      setError(ERROR_MESSAGES.INVALID_USER);
+    }
+  };
 
-const handleGoogleError = (error) => {
-    console.error('Google login failed:', error);};
+  const handleGoogleError = (error) => {
+    console.error('Google login failed:', error);
+    setError(ERROR_MESSAGES.INVALID_USER);
+  };
   return (
     <div>
        <div className='login-header'>
