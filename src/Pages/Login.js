@@ -4,8 +4,10 @@ import { NavLink,useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import { GoogleLogin } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
+import { ReactComponent as Loader } from '../loader/Loader.svg'
 
 export default function Login() {
+  const[showLoader,setShowLoader]=useState(false)
   const { register, formState, handleSubmit } = useForm();
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -16,7 +18,10 @@ export default function Login() {
     EMAIL_REQUIRED: "Email is required",
     PASSWORD_REQUIRED: "Password is required",};
   const onsubmitFtn = (data) => {
-    const item = localStorage.getItem('items');
+    const item = localStorage.getItem(`${data.email}`);
+    setShowLoader(true)
+    setTimeout(() => setShowLoader(false), 1000)
+
     if (!item) {
       setError(ERROR_MESSAGES.ACCOUNT_NOT_EXIST);
       return;}
@@ -24,15 +29,19 @@ export default function Login() {
   const { email: signupEmail, password: signupPassword } = parsedItem;
     if (signupEmail === data.email && signupPassword === data.password) {
       const login_data="loged"
-      localStorage.setItem('login_items',JSON.stringify(login_data))
-      navigate('/listpage');
+      localStorage.setItem('LoginStatus',JSON.stringify(login_data))
+      console.log(data);
+      navigate('/listpage',{
+        state:data
+      });
     } else {
       const login_data=""
-      localStorage.setItem('login_items',JSON.stringify(login_data))
+      localStorage.setItem('LoginStatus',JSON.stringify(login_data))
       setError(ERROR_MESSAGES.INVALID_USER);}};
   const handleGoogleLogin = (response) => {
     const decodedUser = jwtDecode(response.credential);
-    const googleItems = JSON.parse(localStorage.getItem('items')) ;
+    console.log(decodedUser.email);
+    const googleItems = JSON.parse(localStorage.getItem(`${decodedUser.email}`)) ;
     const { given_name: googleName, email: googleEmail } = decodedUser;
     if (!googleItems) {
       setError(ERROR_MESSAGES.ACCOUNT_NOT_EXIST);
@@ -41,16 +50,16 @@ export default function Login() {
 
     if (googleItems && googleName === googleItems.given_name && googleEmail === googleItems.email) {
       const login_data="loged"
-      localStorage.setItem('login_items',JSON.stringify(login_data))
-      navigate('/listpage');
+      localStorage.setItem('LoginStatus',JSON.stringify(login_data))
+      navigate('/listpage',{
+       state:googleItems
+      });
     } else {
-      localStorage.setItem()
       const login_data=""
-      localStorage.setItem('login_items',JSON.stringify(login_data))
+      localStorage.setItem('LoginStatus',JSON.stringify(login_data))
       setError(ERROR_MESSAGES.INVALID_USER);
     }
   };
-
   const handleGoogleError = (error) => {
     console.error('Google login failed:', error);
     setError(ERROR_MESSAGES.INVALID_USER);
@@ -62,11 +71,16 @@ export default function Login() {
         </div>
         <form className='login-main-container' onSubmit={handleSubmit(onsubmitFtn)} >
             <div className='form-group'>
-            <GoogleLogin className="gogle-auth"
+              <div className='google-auth'>
+              <GoogleLogin 
                 onSuccess={handleGoogleLogin}
                 onError={handleGoogleError}       
-                text='signup_with'
-            />
+                text='signin_with'
+                shape='pill'
+                logo_alignment='left'/>
+
+              </div>
+            
                 {error && <p className='error-messages'>{error}</p>}
                 <label>Email</label>
                 <input placeholder='Enter Email...' 
@@ -87,7 +101,7 @@ export default function Login() {
                   }})}/>
                 {errors.password?.message&&<p className='error-message'>{errors.password.message}</p>}
               </div>
-            <button className='login-button' >Login</button>
+            <button className='login-button'disabled={showLoader} >{!showLoader? "Login":<Loader className="spinner"/>}</button>
             <div className='login-text-box'>
             Don't have an account? <NavLink to="/signUp">  SignUp </NavLink>
             </div>

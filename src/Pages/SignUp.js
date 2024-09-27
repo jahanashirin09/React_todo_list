@@ -10,12 +10,16 @@ export default function SignUp() {
     const navigate = useNavigate();
     const{errors}=formState;
     const onsubmitFtn=(data)=>{
-      localStorage.setItem('items',JSON.stringify(data))
+        // console.log(data.email);
+        // console.log(data);
+        // console.log(JSON.stringify(data),"stringify");
+      localStorage.setItem(`${data.email}`,JSON.stringify(data))
        navigate('/')
        console.log(data);}
     const handleGoogleLogin = (response) => {
         const signUpdecoded = jwtDecode(response.credential);
-        localStorage.setItem('items',JSON.stringify(signUpdecoded))
+        console.log(signUpdecoded.email);
+        localStorage.setItem(`${signUpdecoded.email}`,JSON.stringify(signUpdecoded))
         navigate('/')
         console.log(signUpdecoded);};
     const handleGoogleError = (error) => {
@@ -89,7 +93,7 @@ export default function SignUp() {
                     }}})}/>
                 {errors.confirmPassword?.message&&<p className='error-message'>{errors.confirmPassword.message}</p>}
             </div>
-            <button to="./login" className='signup-button' >Sign Up</button>
+            <button to="./login" className='signup-button'type="submit">Sign Up</button>
             <div className='login-text-box'>
             Already have an account  <NavLink to="/">Login here</NavLink>
            </div>

@@ -1,0 +1,82 @@
+.login-header{
+  margin: 3.125rem auto 1.25rem auto;
+    text-align: center;
+    font-weight:800;
+    font-size: 2.188rem;
+   
+   }
+   .login-main-container {
+     max-width: 31.25rem;
+     margin: 3.125rem auto 12.5rem auto;
+     background-color: rgb(251, 251, 251);
+     padding: 2.5rem;
+     border: 0.063rem solid rgb(233, 234, 236);
+     border-radius: 1.25rem;
+     font-size: 1rem;
+     font-weight: 400;
+     box-shadow: 0.063rem 0.063rem rgb(209, 204, 204);
+   }
+   .form-group {
+     display: flex;
+     flex-direction: column;
+     gap: 0.625rem;
+     margin-top: 1.25rem;
+   }
+   .form-group label {
+     display: block;
+   }
+   .form-group input {
+     border: 0.063rem solid rgb(240, 237, 237);
+     padding: 0.625rem;
+     border-radius: 0.875rem;
+     box-shadow: 0.063rem 0.063rem rgb(209, 204, 204);
+   }
+   .login-button {
+     width:100%;
+     height: 2.25rem;
+     background-color: rgb(6, 159, 57);
+     box-shadow: 0 0 0.625rem rgba(243, 241, 241, 0.1);
+     border: none;
+     border-radius: 0.875rem;
+     margin-bottom: 0.625rem;
+     margin-top: 2.5rem;
+     color: white;
+     transition: 0.3s;
+     cursor: pointer;
+     font-weight: 300;
+   }
+   .login-text-box {
+     text-align: center;
+     margin-top: 1rem;
+   }
+   .signup-button:hover {
+     background-color: rgb(6, 142, 52);
+   }
+   .error-messages{
+    color:red;
+  font-size: 1.125rem;
+  margin-top:0.125rem;
+ text-align: center;
+   }
+   .login-button:disabled {
+    background: #e7e8e9;
+    color: #9fa3a9;
+    cursor: not-allowed;
+  }
+  
+  .spinner {
+    animation-name: spin;
+    animation-duration: 500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+   
