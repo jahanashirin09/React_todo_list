@@ -13,13 +13,17 @@ export default function SignUp() {
         // console.log(data.email);
         // console.log(data);
         // console.log(JSON.stringify(data),"stringify");
-      localStorage.setItem(`${data.email}`,JSON.stringify(data))
+        const Email=data.email
+        const sighupdata=JSON.stringify(data)
+      localStorage.setItem(Email,sighupdata)
        navigate('/')
        console.log(data);}
     const handleGoogleLogin = (response) => {
         const signUpdecoded = jwtDecode(response.credential);
         console.log(signUpdecoded.email);
-        localStorage.setItem(`${signUpdecoded.email}`,JSON.stringify(signUpdecoded))
+        const GooglesignupEmail=signUpdecoded.email
+        const GooglesignupData=JSON.stringify(signUpdecoded)
+        localStorage.setItem(GooglesignupEmail,GooglesignupData)
         navigate('/')
         console.log(signUpdecoded);};
     const handleGoogleError = (error) => {

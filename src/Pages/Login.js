@@ -12,6 +12,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { errors } = formState;
+  const LoginStatus='LoginStatus'
   const ERROR_MESSAGES = {
     ACCOUNT_NOT_EXIST: "Account doesn't exist",
     INVALID_USER: "Invalid user",
@@ -22,16 +23,19 @@ export default function Login() {
     setTimeout(() => {
       setShowLoader(false)
     }, 1000)
-    const item = localStorage.getItem(`${data.email}`);
+    const loginEmail=data.email
+    const item = localStorage.getItem(loginEmail);
     if (!item) {
       console.log(showLoader);
       setError(ERROR_MESSAGES.ACCOUNT_NOT_EXIST);
       return;}
   const parsedItem = JSON.parse(item);
   const { email: signupEmail, password: signupPassword } = parsedItem;
+  
     if (signupEmail === data.email && signupPassword === data.password) {
       const login_data="loged"
-      localStorage.setItem('LoginStatus',JSON.stringify(login_data))
+      const loginsign=JSON.stringify(login_data)
+      localStorage.setItem(LoginStatus,loginsign)
         setTimeout(() => {
         navigate('/listpage',{
           state:data
@@ -39,12 +43,14 @@ export default function Login() {
       }, 1000)
     } else {
       const login_data=""
-      localStorage.setItem('LoginStatus',JSON.stringify(login_data))
+      const loginsign=JSON.stringify(login_data)
+      localStorage.setItem(LoginStatus,loginsign)
       setError(ERROR_MESSAGES.INVALID_USER);}};
   const handleGoogleLogin = (response) => {
     const decodedUser = jwtDecode(response.credential);
     console.log(decodedUser.email);
-    const googleItems = JSON.parse(localStorage.getItem(`${decodedUser.email}`)) ;
+    const googleloginEmail=decodedUser.email
+    const googleItems = JSON.parse(localStorage.getItem(googleloginEmail)) ;
     const { given_name: googleName, email: googleEmail } = decodedUser;
     if (!googleItems) {
       setError(ERROR_MESSAGES.ACCOUNT_NOT_EXIST);
@@ -53,13 +59,15 @@ export default function Login() {
 
     if (googleItems && googleName === googleItems.given_name && googleEmail === googleItems.email) {
       const login_data="loged"
-      localStorage.setItem('LoginStatus',JSON.stringify(login_data))
+      const googleloginData=JSON.stringify(login_data)
+      localStorage.setItem(LoginStatus,googleloginData)
       navigate('/listpage',{
        state:googleItems
       });
     } else {
       const login_data=""
-      localStorage.setItem('LoginStatus',JSON.stringify(login_data))
+      const googleloginData=JSON.stringify(login_data)
+      localStorage.setItem(LoginStatus,googleloginData)
       setError(ERROR_MESSAGES.INVALID_USER);
     }
   };

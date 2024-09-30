@@ -70,8 +70,8 @@
   font-size: 0.938rem;
   border: none;
   width: 20;
-  gap: 120px;
-  height: 40px;
+  gap: 7.5rem;
+  height:  2.5rem;
 }
 .move-up {
   background-color: rgba(102, 178, 239, 0.935);
@@ -84,8 +84,8 @@
   font-size: 0.938rem;
   border: none;
   width: 20;
-  gap: 120px;
-  height: 40px;
+  gap: 7.5rem;
+  height: 2.5rem
 }
 .move-down {
   background-color: rgba(102, 178, 239, 0.935);
@@ -98,8 +98,8 @@
   font-size: 0.938rem;
   border: none;
   width: 20;
-  gap: 120px;
-  height: 40px;
+  gap: 7.5rem;
+  height: 2.5rem;
 }
 .delete-btn:hover {
   background-color: rgba(232, 6, 6, 0.826);
@@ -112,7 +112,7 @@
   text-decoration-style:solid;
   text-decoration-line: line-through; 
   text-decoration-color: rgb(225, 82, 82);
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 0.125rem;
 
 }
 .text-task{
@@ -129,8 +129,8 @@
   font-size: 0.938rem;
   border: none;
   width: 476px;
-  gap: 120px;
-  height: 40px;
+  gap: 7.5rem;
+  height: 2.5rem;
 
 }
 .logout-btn{
@@ -144,8 +144,8 @@
   font-size: 0.938rem;
   border: none;
   width: 20;
-  gap: 120px;
-  height: 40px;
+  gap: 7.5rem;
+  height: 2.5rem;
   
 }
 .logout-btn-container{
