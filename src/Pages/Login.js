@@ -8,7 +8,6 @@ import { ReactComponent as Loader } from '../loader/Loader.svg'
 
 export default function Login() {
   const[showLoader,setShowLoader]=useState(false)
-  const[user,setUser]=useState(false)
   const { register, formState, handleSubmit } = useForm();
   const [error, setError] = useState('');
   const navigate = useNavigate();
