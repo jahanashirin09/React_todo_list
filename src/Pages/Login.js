@@ -8,6 +8,7 @@ import { ReactComponent as Loader } from '../loader/Loader.svg'
 
 export default function Login() {
   const[showLoader,setShowLoader]=useState(false)
+  const[user,setUser]=useState(false)
   const { register, formState, handleSubmit } = useForm();
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -18,11 +19,13 @@ export default function Login() {
     EMAIL_REQUIRED: "Email is required",
     PASSWORD_REQUIRED: "Password is required",};
   const onsubmitFtn = (data) => {
-    const item = localStorage.getItem(`${data.email}`);
     setShowLoader(true)
-    setTimeout(() => setShowLoader(false), 1000)
-
+    setTimeout(() => {
+      setShowLoader(false)
+    }, 1000)
+    const item = localStorage.getItem(`${data.email}`);
     if (!item) {
+      console.log(showLoader);
       setError(ERROR_MESSAGES.ACCOUNT_NOT_EXIST);
       return;}
   const parsedItem = JSON.parse(item);
@@ -30,10 +33,11 @@ export default function Login() {
     if (signupEmail === data.email && signupPassword === data.password) {
       const login_data="loged"
       localStorage.setItem('LoginStatus',JSON.stringify(login_data))
-      console.log(data);
-      navigate('/listpage',{
-        state:data
-      });
+        setTimeout(() => {
+        navigate('/listpage',{
+          state:data
+        });
+      }, 1000)
     } else {
       const login_data=""
       localStorage.setItem('LoginStatus',JSON.stringify(login_data))

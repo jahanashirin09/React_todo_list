@@ -50,7 +50,7 @@ export default function Addlist() {
     const findTodo = tasks.find((task) => task.id === id);
     SetEditTask(findTodo);};
   const handleLogout=()=>{
-     localStorage.removeItem(`${data.email}`)
+    //  localStorage.removeItem(`${data.email}`)
      localStorage.removeItem("LoginStatus")
      navigate('/')
      //localStorage.getItem(`${data.email}`)
