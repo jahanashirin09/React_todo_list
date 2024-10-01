@@ -4,7 +4,7 @@ import { NavLink,useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
 import { GoogleLogin } from '@react-oauth/google';
 import {jwtDecode} from 'jwt-decode';
-import { ReactComponent as Loader } from '../loader/Loader.svg'
+import { ReactComponent as Loader } from '../assets/images/Loader.svg'
 
 export default function Login() {
   const[showLoader,setShowLoader]=useState(false)
@@ -34,8 +34,7 @@ export default function Login() {
   
     if (signupEmail === data.email && signupPassword === data.password) {
       const login_data="loged"
-      const loginsign=JSON.stringify(login_data)
-      localStorage.setItem(LoginStatus,loginsign)
+      localStorage.setItem(LoginStatus,login_data)
         setTimeout(() => {
         navigate('/listpage',{
           state:data
@@ -43,8 +42,7 @@ export default function Login() {
       }, 1000)
     } else {
       const login_data=""
-      const loginsign=JSON.stringify(login_data)
-      localStorage.setItem(LoginStatus,loginsign)
+      localStorage.setItem(LoginStatus,login_data)
       setError(ERROR_MESSAGES.INVALID_USER);}};
   const handleGoogleLogin = (response) => {
     const decodedUser = jwtDecode(response.credential);
@@ -56,21 +54,17 @@ export default function Login() {
       setError(ERROR_MESSAGES.ACCOUNT_NOT_EXIST);
       return;
     }
-
     if (googleItems && googleName === googleItems.given_name && googleEmail === googleItems.email) {
       const login_data="loged"
-      const googleloginData=JSON.stringify(login_data)
-      localStorage.setItem(LoginStatus,googleloginData)
+      localStorage.setItem(LoginStatus,login_data)
       navigate('/listpage',{
        state:googleItems
       });
     } else {
       const login_data=""
-      const googleloginData=JSON.stringify(login_data)
-      localStorage.setItem(LoginStatus,googleloginData)
+      localStorage.setItem(LoginStatus,login_data)
       setError(ERROR_MESSAGES.INVALID_USER);
-    }
-  };
+    }};
   const handleGoogleError = (error) => {
     console.error('Google login failed:', error);
     setError(ERROR_MESSAGES.INVALID_USER);
@@ -88,10 +82,7 @@ export default function Login() {
                 onError={handleGoogleError}       
                 text='signin_with'
                 shape='pill'
-                logo_alignment='left'/>
-
-              </div>
-            
+                logo_alignment='left'/></div>
                 {error && <p className='error-messages'>{error}</p>}
                 <label>Email</label>
                 <input placeholder='Enter Email...' 

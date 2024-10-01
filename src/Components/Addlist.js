@@ -1,14 +1,15 @@
 import React,{ useEffect, useState } from "react";
 import "./Addlist.css";
 import { v4 as uuidv4 } from "uuid";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation} from "react-router-dom";
+import ListComponent from "./ListComponent";
+import Logout from "./Logout";
 
 export default function Addlist() {
-  // const initialState = JSON.parse(localStorage.setItem("tasks")) ||[];
-  const [tasks, setTask] = useState([]);
+  // const initialState = JSON.parse(localStorage.setItem("tasks",)) ||[];
+  const [tasks, setTask] = useState([])
   const [newTask, setNewTask] = useState("");
   const [editTask, SetEditTask] = useState(null);
-  const navigate=useNavigate()
   // useEffect(() => {
   //   localStorage.getItem("tasks", JSON.stringify(tasks));
   // }, [tasks]);
@@ -49,20 +50,11 @@ export default function Addlist() {
   const handleEdit = ({ id }) => {
     const findTodo = tasks.find((task) => task.id === id);
     SetEditTask(findTodo);};
-  const handleLogout=()=>{
-    //  localStorage.removeItem(`${data.email}`)
-     localStorage.removeItem("LoginStatus")
-     navigate('/')
-     //localStorage.getItem(`${data.email}`)
-    console.log(data);}
   return (
     <div>
       <form onSubmit={onFormSubmit}>
         <div className="addlist-container">
-          <div className="logout-btn-container">
-          <button className="logout-btn" onClick={handleLogout} loading>Logout
-          </button>
-          </div>
+          <Logout/>
           <input
             className="input-task"
             type="text"
@@ -72,35 +64,12 @@ export default function Addlist() {
             onChange={onInputChange}/>
           <button className={`Add-task${newTask?"":"disabled"} `} disabled={!newTask} >{editTask ? "Ok" : "add task"}</button>
         </div>
-       
-          {tasks.map((task) => (
-             <div className="overViewContainer">
-            <li className="list-item" key={task.id}>
-              <input
-                type="text"
-                value={task.title}
-                className={`text-task${task.completed ? "completed" : ""}`}
-                onChange={(event) => event.preventDefault()}
-              ></input>
-              <div className="list-btn">
-                <button
-                  className="delete-btn"
-                  onClick={() => handledelete(task)}>
-                  Delete
-                </button>
-                <button
-                  className="move-up"
-                  onClick={() => handleComplete(task)}>
-                  <i class="fa-solid fa-circle-check"></i>
-                </button>
-                <button className="move-down" onClick={() => handleEdit(task)} >
-                <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-              </div>
-            </li>
-            </div>
-          ))}
-        
+         <ListComponent
+         tasks={tasks}
+         handledelete={handledelete}
+         handleEdit={handleEdit}
+         handleComplete={handleComplete}
+         />
       </form>
     </div>
   );

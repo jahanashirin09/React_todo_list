@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
-import ListPage from "../Components/ListPage";
+import ListPage from "../Pages/ListPage";
 import PrivateRoutes from "./PrivateRoutes";
 
 export default function PageNavigation() {

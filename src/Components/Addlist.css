@@ -32,92 +32,6 @@
 .Add-task:hover {
   background: rgba(6, 159, 57, 0.925);
 }
-.overViewContainer {
-  display: flex;
-  flex-direction: column;
-  border: 0.063rem  solid #e6e8e9;
-  gap: 0.625rem;
-  padding: 0.938rem 1.25rem;
-  margin: 0.625rem auto 1.25rem auto;
-  width: 31.25rem;
-}
-.list-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  outline: none;
-  padding: 0.625rem 0.625rem;
-  border-radius: 0.25rem;
-  border: 0.063rem  solid #e6e8e9;
-  width: 95%;
-  margin-bottom: 1.25rem;
-}
-
-.list-btn {
-  display: flex;
-  flex-direction: row;
-  gap: 1.25rem;
-  
-}
-.delete-btn {
-  background-color: rgb(232, 6, 6);
-  text-align: center;
-  color: white;
-  padding: 0.313rem 0.625rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 0.938rem;
-  border: none;
-  width: 20;
-  gap: 7.5rem;
-  height:  2.5rem;
-}
-.move-up {
-  background-color: rgba(102, 178, 239, 0.935);
-  text-align: center;
-  color: white;
-  padding: 0.313rem 0.625rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 0.938rem;
-  border: none;
-  width: 20;
-  gap: 7.5rem;
-  height: 2.5rem
-}
-.move-down {
-  background-color: rgba(102, 178, 239, 0.935);
-  text-align: center;
-  color: white;
-  padding: 0.313rem 0.625rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 0.938rem;
-  border: none;
-  width: 20;
-  gap: 7.5rem;
-  height: 2.5rem;
-}
-.delete-btn:hover {
-  background-color: rgba(232, 6, 6, 0.826);
-}
-.move-up:hover,.move-down:hover {
-  background-color: rgba(102, 177, 239, 0.766);
-}
-
-.text-taskcompleted {
-  text-decoration-style:solid;
-  text-decoration-line: line-through; 
-  text-decoration-color: rgb(225, 82, 82);
-  text-decoration-thickness: 0.125rem;
-
-}
-.text-task{
-  width:50%
-}
 .Add-taskdisabled{
   background: rgb(169, 172, 170);
   text-align: center;
@@ -133,30 +47,6 @@
   height: 2.5rem;
 
 }
-.logout-btn{
-  background-color:rgb(6, 159, 57);
-  text-align: center;
-  color: white;
-  padding: 0.313rem 0.625rem;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 0.938rem;
-  border: none;
-  width: 20;
-  gap: 7.5rem;
-  height: 2.5rem;
-  
-}
-.logout-btn-container{
-  display: flex;
-  justify-content: end;
-}
-.logout-btn:hover{
-  background: rgba(6, 159, 57, 0.925);
-}
-/* HTML: <div class="loader"></div> */
-/* HTML: <div class="loader"></div> */
 .loader {
   width: 0.938rem;
   aspect-ratio: 1;

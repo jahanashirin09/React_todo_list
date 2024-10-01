@@ -1,6 +1,6 @@
 import React from "react";
 import "./ListPage.css";
-import Addlist from "./Addlist";
+import Addlist from "../Components/Addlist";
 
 export default function ListPage() {
   return (

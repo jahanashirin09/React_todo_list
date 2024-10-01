@@ -1,0 +1,22 @@
+.logout-btn{
+    background-color:rgb(6, 159, 57);
+    text-align: center;
+    color: white;
+    padding: 0.313rem 0.625rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.938rem;
+    border: none;
+    width: 20;
+    gap: 7.5rem;
+    height: 2.5rem;
+    
+  }
+  .logout-btn-container{
+    display: flex;
+    justify-content: end;
+  }
+  .logout-btn:hover{
+    background: rgba(6, 159, 57, 0.925);
+  }
