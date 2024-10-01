@@ -31,18 +31,15 @@ export default function Login() {
       return;}
   const parsedItem = JSON.parse(item);
   const { email: signupEmail, password: signupPassword } = parsedItem;
-  
     if (signupEmail === data.email && signupPassword === data.password) {
-      const login_data="loged"
-      localStorage.setItem(LoginStatus,login_data)
+      localStorage.setItem(LoginStatus,"loged")
         setTimeout(() => {
         navigate('/listpage',{
           state:data
         });
       }, 1000)
     } else {
-      const login_data=""
-      localStorage.setItem(LoginStatus,login_data)
+      localStorage.setItem(LoginStatus,"")
       setError(ERROR_MESSAGES.INVALID_USER);}};
   const handleGoogleLogin = (response) => {
     const decodedUser = jwtDecode(response.credential);
@@ -55,14 +52,12 @@ export default function Login() {
       return;
     }
     if (googleItems && googleName === googleItems.given_name && googleEmail === googleItems.email) {
-      const login_data="loged"
-      localStorage.setItem(LoginStatus,login_data)
+      localStorage.setItem(LoginStatus,"loged")
       navigate('/listpage',{
        state:googleItems
       });
     } else {
-      const login_data=""
-      localStorage.setItem(LoginStatus,login_data)
+      localStorage.setItem(LoginStatus,"")
       setError(ERROR_MESSAGES.INVALID_USER);
     }};
   const handleGoogleError = (error) => {
